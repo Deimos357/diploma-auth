@@ -1,0 +1,33 @@
+spring:
+    profiles:
+        active: dev
+    application:
+         name: auth
+    jpa:
+      hibernate:
+        ddl-auto: none
+    security:
+      basic:
+        enabled: false
+      jwtSignature: 123456
+      defaultClient: api-gateway # currently we protects only api-gateway
+      accessTokenValiditySeconds: 604800 # one week
+      refreshTokenValiditySeconds: 604800 # one week
+
+server:
+    servlet:
+          context-path: /auth
+
+---
+
+spring:
+    profiles: dev
+    datasource:
+        write:
+            jdbcUrl: jdbc:postgresql://localhost:5432/tripify
+            username: postgres
+            password: postgres
+            driver-class-name: org.postgresql.Driver
+
+server:
+    port: 8082
